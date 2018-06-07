@@ -12,6 +12,7 @@ class Consensus:
         self.difficulty = 1
         self.max_diff = 12  # Threshold to be defined
         self.kill_mine = 0
+        self.last_recalculation_timestamp = datetime.now()
 
 
     def __getitem__(self, item):
@@ -58,6 +59,7 @@ class Consensus:
             message = json.dumps(data)
             block_hash = self.crypto_helper.hash(message)
         block.timestamp = datetime.now()
+        self.last_recalculation_timestamp = datetime.now()
 
     #    Code for updating the difficulty to be implemented by Blockchain component
     #    if self.blocks_counter % self.blocks_threshold  == 0 & self.recalculate == 1:
